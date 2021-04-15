@@ -1,14 +1,12 @@
-#Fichier contenant la classe jeu qui gère une partie
+"""Fichier repris du projet Polychess
+Il permet de gérer une planche de jeu afin d'avoir les mouvement légaux et l'enregistrement en PGN"""
 
 import chess
 import chess.pgn
-import random
+
 import datetime
 import os
-
 import logging
-
-from chercheur import Chercheur
 
 #Classe qui gère la planche de jeu
 class Jeu:
@@ -34,23 +32,6 @@ class Jeu:
 			self.node = self.game.add_variation(chess.Move.from_uci(move_uci))
 		else :
 			self.node = self.node.add_variation(chess.Move.from_uci(move_uci))
-
-	#Fonction qui cherche le mouvement le plus adapter, le joue et le retourne
-	def mouv_sortant(self):
-		#move_out = self.random_move()
-		move_out = self.ch.cherche(self.board)
-		self.board.push(move_out)
-		self.node = self.node.add_variation(chess.Move.from_uci(move_out.uci()))
-		return move_out.uci()
-
-	#Fonction qui retourne un mouvement aléatoire
-	#N'est plus utilisé
-	def random_move(self):
-   		moves = []
-   		for i in self.board.legal_moves:
-   			moves.append(i)
-   		index = random.randint(0,len(moves)-1)
-   		return moves[index]
 
    	#Fonction qui enregistre la game au format PGN dans le dossier Saved Game
 	def save(self):
