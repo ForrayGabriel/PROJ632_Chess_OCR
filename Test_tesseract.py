@@ -4,6 +4,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
+# This file is an attempt to open an image, apply some effects on it and use the tesseract librairy to get
+# the text from the image
+
+
 img = cv2.imread('test.jpg')
 
 # get grayscale image
